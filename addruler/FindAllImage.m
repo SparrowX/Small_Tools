@@ -1,5 +1,9 @@
 function[cnt] = FindAllImage(imgDataPath, writeDataPath, rulerPath)
-ruler = imread(rulerPath);
+%rulerPath = char(rulerPath);
+ruler_50 = imread(char(rulerPath(1)));
+ruler_100 = imread(char(rulerPath(2)));
+ruler_200 = imread(char(rulerPath(3)));
+ruler_500 = imread(char(rulerPath(4)));
 imgDataDir  = dir(imgDataPath);             % 遍历所有文件
 cnt = 0;
 for i = 1:length(imgDataDir)
@@ -10,6 +14,15 @@ for i = 1:length(imgDataDir)
     end
     imgDir = dir([imgDataPath imgDataDir(i).name '/*.jpg']); 
     for j =1:length(imgDir)                 % 遍历所有图片
+        if(strfind(imgDir(j).name, '500'))
+            ruler = ruler_500;
+        elseif(strfind(imgDir(j).name, '100'))
+            ruler = ruler_100;
+        elseif(strfind(imgDir(j).name, '200'))
+            ruler = ruler_200;
+        else
+            ruler = ruler_50;
+        end
         path = [imgDataPath imgDataDir(i).name '/' imgDir(j).name];
         origin_image = imread([imgDataPath imgDataDir(i).name '/' imgDir(j).name]);
         if exist([writeDataPath imgDataDir(i).name],'dir')==0

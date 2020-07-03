@@ -10,7 +10,7 @@ close all;
 %%设定原始图片目录，保存图片目录，标尺文件路径
 imgDataPath = './result/';
 writeDataPath = './processed/';
-rulerPath = ('ruler.jpg');
+rulerPath = {'50.jpg','100.jpg','200.jpg','500.jpg'};
 cnt = FindAllImage(imgDataPath, writeDataPath, rulerPath);
 fprintf('************************\n',cnt);
 fprintf('成功处理了%d个文件！结束！\n',cnt);
